@@ -46,9 +46,6 @@ export default {
       this.searchQuery = document.querySelector('input').value;
     },
     getNewsbySearch() {
-      // Виконати пошук на основі значення searchQuery
-      // Результати зберегти в this.currentNews
-      // Скинути сторінку до першої при новому пошуку
       this.page = 1;
       this.fetchNews();
     },
