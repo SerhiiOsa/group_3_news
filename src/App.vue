@@ -1,17 +1,20 @@
 <template>
     <div id="app">
+        <Search />
         <RecentNews />
     </div>
 </template>
 
 <script>
-import RecentNews from './components/RecentNews.vue';
+import RecentNews from './components/RecentNews.vue'
+import Search from './components/Search.vue'
 
 
 export default {
     name: 'App',
     components: {
-        RecentNews
+        RecentNews,
+        Search
     }
 }
 </script>

@@ -1,7 +1,9 @@
 <template>
-    <div id="get-news">
-        <div class="recent-news" v-if="currentNews.articles && currentNews.articles.length > 0">
-            <h2>Найсвіжіші новини:</h2>
+    <div id="search">
+        <input @change="onInputsSearchQuery" v-model="searchQuery" placeholder="Введіть ключове слово">
+        <button @click="getNewsbySearch">Пошук</button>
+        <div class="searched-news" v-if="currentNews.articles && currentNews.articles.length > 0">
+            <h2>Новини за пошуком:</h2>
             <ul>
                 <li v-for="(article, index) in currentNews.articles.slice(0, 10)" :key="index">
                     {{ article.title }}
@@ -15,10 +17,10 @@
         </div>
     </div>
 </template>
-  
+
 <script>
 export default {
-    name: 'App',
+    name: 'SearchNews',
     props: {},
     data() {
         return {
@@ -28,7 +30,10 @@ export default {
         };
     },
     methods: {
-        getNews() {
+        onInputsSearchQuery() {
+            this.searchQuery = document.querySelector('input').value;
+        },
+        getNewsbySearch() {
             // Обчислюємо вчорашню дату
             const today = new Date();
             today.setDate(today.getDate() - this.lastDays);
@@ -54,14 +59,11 @@ export default {
                 });
         }
     },
-    mounted() {
-        this.getNews();
-    }
-};
+}
 </script>
-  
+
 <style>
-.recent-news {
+.searched-news {
     width: 100%;
     display: flex;
     flex-direction: column;
