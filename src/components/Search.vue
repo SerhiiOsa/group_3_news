@@ -81,7 +81,7 @@ export default {
       if(this.page >= 1) this.page--;
     },
     loadMore() {
-      if(this.page * this.pageSize >= this.currentNews.articles.length) this.page++;
+      if(this.page * this.pageSize < this.currentNews.articles.length) this.page++;
     },
   },
 };
