@@ -1,25 +1,40 @@
 <template>
     <div id="app">
-        <Search />
-        <RecentNews />
+        <Categories @onClickCategoryNews="changeCategory"/>
+        <Search :changedCategory="category"/>
     </div>
 </template>
 
 <script>
-import RecentNews from './components/RecentNews.vue'
+import Categories from './components/Categories.vue';
 import Search from './components/Search.vue'
 
 
 export default {
     name: 'App',
     components: {
-        RecentNews,
+        Categories,
         Search
+
+    },
+    data() {
+        return {
+            category: ''
+        }
+    },
+    methods: {
+        changeCategory(value) {
+            this.category = value;
+        }
     }
 }
 </script>
 
 <style>
+body {
+    background-color: rgb(246, 235, 213);
+}
+
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
