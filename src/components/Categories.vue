@@ -33,16 +33,16 @@ export default {
 </script>
 
 <style>
-ul {
+#categories ul {
+    width: 100%;
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-wrap: nowrap;
     gap: 10px;
 }
 
-li {
-    background-color: rgb(203, 212, 212);
-    width: 140px;
+#categories li {
+    font-size: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50,7 +50,7 @@ li {
     cursor: pointer;
 }
 
-li:hover {
-    transform: scale(1.05);
+#categories li:hover {
+    color: rgb(4, 123, 92);
 }
 </style>

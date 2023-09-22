@@ -2,21 +2,27 @@
     <div id="search">
         <input @change="onInputsSearchQuery" placeholder="Введіть ключове слово">
         <button @click="getNewsbySearch">Пошук</button>
-        <button @click="loadPrevious">Назад</button>
-        <button @click="loadMore">Далі</button>
         <div class="searched-news" v-if="currentNews.articles && currentNews.articles.length > 0">
             <h2>Новини:</h2>
+            <div class="navigation">
+                <button @click="loadPrevious">Назад</button>
+                <button @click="loadMore">Далі</button>
+            </div>
             <ul>
                 <li v-for="(article, index) in displayedNews" :key="index">
                     <a :href="article.url" target="_blank">
-                        {{ article.title }}
-                        <img class="img" v-bind:src="article.urlToImage" alt="image">
-                        {{ truncateText(article.content, 100) }}
+                        <h4 class="title">
+                            {{ article.title }}
+                        </h4>
+                        <img v-if="article.urlToImage" class="img" v-bind:src="article.urlToImage" alt="image">
+                        <p class="content">
+                            {{ truncateText(article.content, 100) }}
+                        </p>
                     </a>
                 </li>
             </ul>
         </div>
-        <div v-else>
+        <div class="searched-news" v-else>
             <p>Новини не отримані або відсутні.</p>
         </div>
     </div>
@@ -104,20 +110,41 @@ export default {
 };
 </script>
 
-<style scoped>
-input {
+<style>
+#search {
+    margin-top: 50px;
+}
+
+#search input {
+    text-align: center;
     width: 300px;
     height: 30px;
     font-size: 20px;
 }
 
-button {
+#search button {
     margin-left: 20px;
-    width: 80px;
-    height: 33px;
+    width: 100px;
+    height: 40px;
+    background-color: rgb(246, 235, 213);
+    border: solid 1px rgb(182, 180, 175);
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.searched-news {
+#search button:hover {
+    background-color: rgb(198, 181, 147);
+    border: solid 1px rgb(80, 70, 53);
+}
+
+#search button:active {
+    color: rgb(4, 123, 92);
+    background-color: rgb(246, 235, 213);
+    border: solid 1px rgb(80, 70, 53);
+}
+
+#search .searched-news {
+    margin-top: 20px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -125,13 +152,20 @@ button {
     align-items: center;
 }
 
-ul {
+.searched-news .navigation {
+    margin-top: 20px;
+    display: flex;
+    align-self: end;
+}
+
+#search ul {
+    margin-top: 20px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
-li {
+#search li {
     background-color: rgb(226, 237, 234);
     width: 250px;
     display: flex;
@@ -139,21 +173,28 @@ li {
     align-items: center;
     margin-top: 10px;
     padding: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+#search li:hover {
+    background-color: rgb(199, 222, 216);
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
-    ;
 }
 
-li:hover {
-    transform: scale(1.05);
-}
-
-a {
+#search a {
     color: black;
     text-decoration: none;
 }
 
-.img {
+#search h4 {
+    font-size: 16px;
+}
+
+#search p {
+    font-size: 14px;
+}
+
+#search .img {
     width: 200px;
-    height: 200px;
 }
 </style>
